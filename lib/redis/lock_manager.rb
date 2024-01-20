@@ -13,9 +13,9 @@
 #
 class Redis::LockManager
   # Default lock timeout set to 2 seconds. This means that if the lock isn't released
-  # within 2 seconds, it will automatically expire.
+  # within 1 seconds, it will automatically expire.
   # This helps to avoid deadlocks in case the process holding the lock crashes or fails to release it.
-  LOCK_TIMEOUT = 2.seconds
+  LOCK_TIMEOUT = 1.second
 
   # Attempts to acquire a lock for the given key.
   #
