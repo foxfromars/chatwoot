@@ -10,7 +10,8 @@
     <div
       class="flex items-center justify-between py-0 px-4"
       :class="{
-        'pb-3 border-b border-slate-75 dark:border-slate-700': hasAppliedFiltersOrActiveFolders,
+        'pb-3 border-b border-slate-75 dark:border-slate-700':
+          hasAppliedFiltersOrActiveFolders,
       }"
     >
       <div class="flex max-w-[85%] justify-center items-center">
@@ -24,9 +25,7 @@
           v-if="!hasAppliedFiltersOrActiveFolders"
           class="p-1 my-0.5 mx-1 rounded-md capitalize bg-slate-50 dark:bg-slate-800 text-xxs text-slate-600 dark:text-slate-300"
         >
-          {{
-            this.$t(`CHAT_LIST.CHAT_STATUS_FILTER_ITEMS.${activeStatus}.TEXT`)
-          }}
+          {{ $t(`CHAT_LIST.CHAT_STATUS_FILTER_ITEMS.${activeStatus}.TEXT`) }}
         </span>
       </div>
       <div class="flex items-center gap-1">
@@ -106,12 +105,6 @@
       @chatTabChange="updateAssigneeTab"
     />
 
-    <p
-      v-if="!chatListLoading && !conversationList.length"
-      class="overflow-auto p-4 flex justify-center items-center"
-    >
-      {{ $t('CHAT_LIST.LIST.404') }}
-    </p>
     <conversation-bulk-actions
       v-if="selectedConversations.length"
       :conversations="selectedConversations"
@@ -350,9 +343,8 @@ export default {
         unassigned: 'unAssignedCount',
       };
 
-      const isAvailableForTheUser = this.currentUserRole === 'administrator' ? true : false;
-      if (isAvailableForTheUser) {
-          ASSIGNEE_TYPE_TAB_KEYS.all = 'allCount';
+      if (this.currentUserRole === 'administrator') {
+        ASSIGNEE_TYPE_TAB_KEYS.all = 'allCount';
       }
 
       return Object.keys(ASSIGNEE_TYPE_TAB_KEYS).map(key => {
@@ -564,7 +556,6 @@ export default {
       this.showDeleteFoldersModal = false;
     },
     onToggleAdvanceFiltersModal() {
-
       if (this.currentUserRole === 'agent') {
         this.showAdvancedFilters = false;
         return;
@@ -654,10 +645,8 @@ export default {
     },
     handleKeyEvents(e) {
       if (hasPressedAltAndJKey(e)) {
-        const {
-          allConversations,
-          activeConversationIndex,
-        } = this.getKeyboardListenerParams();
+        const { allConversations, activeConversationIndex } =
+          this.getKeyboardListenerParams();
         if (activeConversationIndex === -1) {
           allConversations[0].click();
         }
@@ -1008,4 +997,3 @@ export default {
   }
 }
 </style>
-
