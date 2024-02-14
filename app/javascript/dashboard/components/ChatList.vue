@@ -287,7 +287,13 @@ export default {
   },
   computed: {
     ...mapGetters({
+      getAccount: 'accounts/getAccount',
+      globalConfig: 'globalConfig/get',
+      authUIFlags: 'getAuthUIFlags',
+      accountUIFlags: 'accounts/getUIFlags',
+      currentAccountId: 'getCurrentAccountId',
       currentUserRole: 'getCurrentRole',
+      accountUser: 'accounts/getAccount',
       currentChat: 'getSelectedChat',
       currentUser: 'getCurrentUser',
       chatLists: 'getAllConversations',
@@ -337,13 +343,21 @@ export default {
         name,
       };
     },
+    currentAccountDetails() {
+      const account = this.getAccount(this.currentAccountId);
+      return account;
+    },
     assigneeTabItems() {
       const ASSIGNEE_TYPE_TAB_KEYS = {
         me: 'mineCount',
         unassigned: 'unAssignedCount',
       };
 
-      if (this.currentUserRole === 'administrator') {
+      if (
+        this.currentUserRole === 'administrator' ||
+        !this.currentAccountDetails.features
+          .only_admin_total_inbox_vizualization
+      ) {
         ASSIGNEE_TYPE_TAB_KEYS.all = 'allCount';
       }
 
