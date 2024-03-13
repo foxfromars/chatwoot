@@ -174,9 +174,10 @@
 import { mapGetters } from 'vuex';
 import VirtualList from 'vue-virtual-scroll-list';
 
-import ConversationAdvancedFilter from './widgets/conversation/ConversationAdvancedFilter.vue';
-import ConversationBasicFilter from './widgets/conversation/ConversationBasicFilter.vue';
-import ChatTypeTabs from './widgets/ChatTypeTabs.vue';
+import ConversationAdvancedFilter from './widgets/conversation/ConversationAdvancedFilter';
+import ConversationBasicFilter from './widgets/conversation/ConversationBasicFilter';
+import ChatTypeTabs from './widgets/ChatTypeTabs';
+import ConversationCard from './widgets/conversation/ConversationCard';
 import ConversationItem from './ConversationItem.vue';
 import timeMixin from '../mixins/time';
 import eventListenerMixins from 'shared/mixins/eventListenerMixins';

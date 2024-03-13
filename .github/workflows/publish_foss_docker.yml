@@ -29,6 +29,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: replace docker tag if master
+        if: github.ref_name == 'master'
+        run: |
+          echo "DOCKER_TAG=foxfromars/chatwoot:develop-ce" >> $GITHUB_ENV
+          
       - name: Set Chatwoot edition
         run: |
           echo -en '\nENV CW_EDITION="ee"' >> docker/Dockerfile
